@@ -14,9 +14,9 @@ use Illuminate\Database\Schema\Builder;
 
 return [
     'up' => function (Builder $schema) {
-        if (!$schema->hasColumn('discussions', 'view_count')) {
+        if (!$schema->hasColumn('discussions', 'essential')) {
             $schema->table('discussions', function (Blueprint $table) {
-                $table->integer('view_count')->default(0)->unsigned();
+                $table->boolean('essential')->default(false)->unsigned();
             });
         }
     },

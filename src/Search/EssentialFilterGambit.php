@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarumite\DiscussionViews\Search;
+namespace Nodeloc\Essential\Search;
 
 use Flarum\Filter\FilterInterface;
 use Flarum\Filter\FilterState;
@@ -18,14 +18,14 @@ use Flarum\Search\SearchState;
 use Flarum\User\User;
 use Illuminate\Database\Query\Builder;
 
-class PopularFilterGambit extends AbstractRegexGambit implements FilterInterface
+class EssentialFilterGambit extends AbstractRegexGambit implements FilterInterface
 {
     /**
      * {@inheritDoc}
      */
     public function getFilterKey(): string
     {
-        return 'popular';
+        return 'essential';
     }
 
     /**
@@ -33,7 +33,7 @@ class PopularFilterGambit extends AbstractRegexGambit implements FilterInterface
      */
     public function getGambitPattern()
     {
-        return 'is:popular';
+        return 'is:essential';
     }
 
     /**
@@ -46,7 +46,7 @@ class PopularFilterGambit extends AbstractRegexGambit implements FilterInterface
 
     protected function sort(Builder $query, User $actor, bool $negate)
     {
-        $query->orderBy('view_count', 'desc');
+        $query->orderBy('id', 'desc');
     }
 
     /**

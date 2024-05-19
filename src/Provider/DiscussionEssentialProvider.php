@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarumite\DiscussionViews\Provider;
+namespace Nodeloc\Essential\Provider;
 
 use Flarum\Foundation\AbstractServiceProvider;
 
-class DiscussionViewsProvider extends AbstractServiceProvider
+class DiscussionEssentialProvider extends AbstractServiceProvider
 {
     public function register()
     {
         $this->container->extend('flarum.forum.discussions.sortmap', function (array $map) {
             return array_merge($map, [
-                'popular'   => '-view_count',
-                'unpopular' => 'view_count',
+                'essential'   => '-essential',
             ]);
         });
     }

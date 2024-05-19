@@ -2,14 +2,14 @@ import app from 'flarum/forum/app';
 import Modal from 'flarum/common/components/Modal';
 import Button from 'flarum/common/components/Button';
 import Stream from 'flarum/common/utils/Stream';
+import Switch from 'flarum/common/components/Switch';
 
-export default class ResetDiscussionViewsModal extends Modal {
+export default class SetDiscussionEssentialModal extends Modal {
   oninit(vnode) {
     super.oninit(vnode);
-
     this.discussion = this.attrs.discussion;
-    this.currentViewsCount = this.attrs.discussion.views();
-    this.newViewsCount = Stream(this.currentViewsCount);
+    this.currentEssential = this.attrs.discussion.essential();
+    this.isEssential = Stream(this.currentEssential);
   }
 
   content() {
@@ -17,12 +17,13 @@ export default class ResetDiscussionViewsModal extends Modal {
       <div className="Modal-body">
         <div className="Form Form--centered">
           <div className="Form-group">
-            <label>{app.translator.trans('flarumite-simple-discussion-views.forum.modal_resetviews.label')}</label>
-            <input className="FormControl" type="number" min="0" bidi={this.newViewsCount} />
+            <Switch state={this.isEssential()} onchange={this.isEssential}>
+              {app.translator.trans('nodeloc-essential.forum.modal_set_essential.is_essential')}
+            </Switch>
           </div>
           <div className="Form-group">
             <Button className="Button Button--primary" type="submit" loading={this.loading}>
-              {app.translator.trans('flarumite-simple-discussion-views.forum.modal_resetviews.submit')}
+              {app.translator.trans('nodeloc-essential.forum.modal_set_essential.submit')}
             </Button>
           </div>
         </div>
@@ -31,7 +32,7 @@ export default class ResetDiscussionViewsModal extends Modal {
   }
 
   title() {
-    return app.translator.trans('flarumite-simple-discussion-views.forum.modal_resetviews.title');
+    return app.translator.trans('nodeloc-essential.forum.modal_set_essential.title');
   }
 
   className() {
@@ -42,12 +43,11 @@ export default class ResetDiscussionViewsModal extends Modal {
     e.preventDefault();
     this.loading = true;
 
-    const newViews = parseInt(this.newViewsCount());
-    const currentViews = this.currentViewsCount;
+    const newEssential = this.isEssential();
 
-    if (newViews >= 0 && newViews !== currentViews) {
+    if (newEssential !== this.currentEssential) {
       this.attrs.discussion
-        .save({ views: newViews })
+        .save({ essential: newEssential })
         .then(() => {
           m.redraw();
         })

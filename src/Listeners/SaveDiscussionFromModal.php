@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarumite\DiscussionViews\Listeners;
+namespace Nodeloc\Essential\Listeners;
 
 use Flarum\Discussion\Event\Saving;
 
@@ -17,13 +17,12 @@ class SaveDiscussionFromModal
 {
     public function handle(Saving $event)
     {
-        if (isset($event->data['attributes']['views']) && $event->actor->can('resetViews', $event->discussion)) {
+        if (isset($event->data['attributes']['essential']) && $event->actor->can('canEssential', $event->discussion)) {
             /**
              * @var \Flarum\Discussion\Discussion
              */
             $discussion = $event->discussion;
-
-            $discussion->view_count = $event->data['attributes']['views'];
+            $discussion->essential = $event->data['attributes']['essential'];
         }
     }
 }

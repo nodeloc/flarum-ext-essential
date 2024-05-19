@@ -1,0 +1,21 @@
+core:
+  forum:
+    index_sort:
+      essential_button: 精华内容
+
+nodeloc-essential:
+  forum:
+    modal_set_essential:
+      title: 帖子加精
+      submit: 提交
+      is_essential: 是否加精
+      label: 设置精华帖子
+    discussion_controls:
+      essential_button: 设置精华
+    tooltip:
+      badge: 精彩内容
+  admin:
+      permissions:
+        set_essential: 谁能设置精华？
+      settings:
+        reward_money: 精华帖奖励多少?

@@ -1,19 +1,21 @@
 core:
   forum:
     index_sort:
-      popular_button: Popular
-      unpopular_button: Unpopular
+      essential_button: Essential
 
-flarumite-simple-discussion-views:
+nodeloc-essential:
   forum:
-    modal_resetviews:
-      title: Reset discussion view count
+    modal_set_essential:
+      title: Set essential
       submit: Submit
-      label: Set to view count
+      is_essential: Is essential?
+      label: Set this discussion to essential
     discussion_controls:
-      resetviews_button: Set view count
+      essential_button: Set essential
+    tooltip:
+      badge: Essential
   admin:
       permissions:
-          reset_views_label: Set discussion views
+        set_essential: Set essential
       settings:
-        ignore_crawlers: Ignore crawler visits
+        reward_money: How many money will reward

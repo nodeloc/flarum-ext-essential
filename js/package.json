@@ -1,5 +1,5 @@
 {
-	"name": "@flarumite/simple-discussion-views",
+	"name": "@nodeloc/flarum-ext-essential",
 	"version": "0.0.0",
 	"private": true,
 	"prettier": "@flarum/prettier-config",

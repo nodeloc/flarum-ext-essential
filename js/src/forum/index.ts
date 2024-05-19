@@ -1,12 +1,12 @@
 import app from 'flarum/forum/app';
-import AddPopularSort from './components/AddPopularSort';
-import AddViewsToModelAndDisplay from './components/AddViewsToModelAndDisplay';
+import AddPopularSort from './components/AddEssentialSort';
 import AddModerationControl from './components/AddModerationControl';
+import AddDiscussionBadge from "./components/AddDiscussionBadge";
 
 export { default as extend } from './extend';
 
-app.initializers.add('flarumite-simple-discussion-views', () => {
+app.initializers.add('nodeloc-ext-essential', () => {
   AddPopularSort();
-  AddViewsToModelAndDisplay();
   AddModerationControl();
+  AddDiscussionBadge();
 });

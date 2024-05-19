@@ -1,19 +1,19 @@
 import app from 'flarum/admin/app';
 
-app.initializers.add('flarumite-simple-discussion-views', () => {
+app.initializers.add('nodeloc-ext-essential', () => {
   app.extensionData
-    .for('flarumite-simple-discussion-views')
+    .for('nodeloc-essential')
     .registerPermission(
       {
         icon: 'far fa-eye',
-        label: app.translator.trans('flarumite-simple-discussion-views.admin.permissions.reset_views_label'),
-        permission: 'discussion.resetViews',
+        label: app.translator.trans('nodeloc-essential.admin.permissions.set_essential'),
+        permission: 'discussion.canEssential',
       },
       'moderate'
     )
     .registerSetting({
-      setting: 'fsdv.ignore-crawlers',
-      type: 'boolean',
-      label: app.translator.trans('flarumite-simple-discussion-views.admin.settings.ignore_crawlers'),
+      setting: 'nodeloc-essential.rewardMoney',
+      type: 'number',
+      label: app.translator.trans('nodeloc-essential.admin.settings.reward_money'),
     });
 });

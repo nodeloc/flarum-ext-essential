@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarumite\DiscussionViews;
+namespace Nodeloc\Essential;
 
 use Flarum\Api\Controller;
 use Flarum\Api\Serializer\DiscussionSerializer;
@@ -30,32 +30,29 @@ return [
     new Extend\Locales(__DIR__.'/resources/locale'),
 
     (new Extend\Model(Discussion::class))
-        ->cast('view_count', 'int'),
+        ->cast('essential', 'boolean'),
 
     (new Extend\Event())
         ->listen(Saving::class, Listeners\SaveDiscussionFromModal::class),
 
     (new Extend\ApiSerializer(DiscussionSerializer::class))
-        ->attribute('views', function (DiscussionSerializer $serializer, Discussion $discussion) {
-            return $discussion->view_count;
+        ->attribute('essential', function (DiscussionSerializer $serializer, Discussion $discussion) {
+            return $discussion->essential;
         })
         ->attributes(AddAttributesBasedOnPermission::class),
 
-    (new Extend\ApiController(Controller\ShowDiscussionController::class))
-        ->prepareDataForSerialization(Listeners\AddDiscussionViewHandler::class),
-
     (new Extend\ApiController(Controller\ListDiscussionsController::class))
-        ->addSortField('view_count'),
+        ->addSortField('essential'),
 
     (new Extend\Settings())
-        ->default('fsdv.ignore-crawlers', true),
+        ->serializeToForum('essentialRewardMoney', 'nodeloc-essential.rewardMoney', 'intval', 0),
 
     (new Extend\ServiceProvider())
-        ->register(Provider\DiscussionViewsProvider::class),
+        ->register(Provider\DiscussionEssentialProvider::class),
 
     (new Extend\SimpleFlarumSearch(DiscussionSearcher::class))
-        ->addGambit(Search\PopularFilterGambit::class),
+        ->addGambit(Search\EssentialFilterGambit::class),
 
     (new Extend\Filter(DiscussionFilterer::class))
-        ->addFilter(Search\PopularFilterGambit::class),
+        ->addFilter(Search\EssentialFilterGambit::class),
 ];

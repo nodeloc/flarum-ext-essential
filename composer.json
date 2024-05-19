@@ -1,35 +1,34 @@
 {
-    "name": "flarumite/simple-discussion-views",
-    "description": "Add view counts to discussions",
+    "name": "nodeloc/flarum-ext-essential",
+    "description": "Set essential discussions",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": "^1.8.0",
-        "jaybizzle/crawler-detect": "^1.2"
+        "flarum/core": "^1.8.0"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "IanM",
-            "homepage": "https://discuss.flarum.org/u/ianm",
+            "name": "James",
+            "homepage": "https://www.nodeloc.com",
             "role": "Developer"
         }
     ],
     "support": {
-        "issues": "https://github.com/flarumite/simple-discussion-views/issues",
-        "source": "https://github.com/flarumite/simple-discussion-views",
-        "forum": "https://discuss.flarum.org/d/24002"
+        "issues": "https://github.com/nodeloc",
+        "source": "https://github.com/nodeloc",
+        "forum": "https://www.nodeloc.com"
     },
     "autoload": {
         "psr-4": {
-            "Flarumite\\DiscussionViews\\": "src/"
+            "Nodeloc\\Essential\\": "src/"
         }
     },
     "extra": {
         "flarum-extension": {
-            "title": "Flarumite Simple Discussion Views",
+            "title": "Essential discussion",
             "category": "feature",
             "icon": {
-                "name": "far fa-eye",
+                "name": "fa-solid fa-star-of-david",
                 "backgroundColor": "#008000",
                 "color": "#fff"
             }
@@ -39,16 +38,6 @@
                 "githubActions": true
             }
         }
-    },
-    "conflict": {
-        "michaelbelgium/flarum-discussion-views": "*"
-    },
-    "require-dev": {
-        "flarum/phpstan": "*"
-    },
-    "scripts": {
-        "analyse:phpstan": "phpstan analyse",
-        "clear-cache:phpstan": "phpstan clear-result-cache"
     },
     "scripts-descriptions": {
         "analyse:phpstan": "Run static analysis"

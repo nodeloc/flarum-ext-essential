@@ -2,18 +2,18 @@ import app from 'flarum/forum/app';
 import { extend } from 'flarum/common/extend';
 import Button from 'flarum/common/components/Button';
 import DiscussionControls from 'flarum/forum/utils/DiscussionControls';
-import ResetDiscussionViewsModal from './ResetDiscussionViewsModal';
+import SetDiscussionEssentialModal from './SetDiscussionEssentialModal';
 import ItemList from 'flarum/common/utils/ItemList';
 import Discussion from 'flarum/common/models/Discussion';
 import type Mithril from 'mithril';
 
 export default function () {
   extend(DiscussionControls, 'moderationControls', function (items: ItemList<Mithril.Children>, discussion: Discussion) {
-    if (discussion.canReset()) {
+    if (discussion.canEssential()) {
       items.add(
-        'reset',
-        <Button icon="far fa-eye" onclick={() => app.modal.show(ResetDiscussionViewsModal, { discussion })}>
-          {app.translator.trans('flarumite-simple-discussion-views.forum.discussion_controls.resetviews_button')}
+        'setEssential',
+        <Button icon="fa-solid fa-star-of-david" onclick={() => app.modal.show(SetDiscussionEssentialModal, { discussion })}>
+          {app.translator.trans('nodeloc-essential.forum.discussion_controls.essential_button')}
         </Button>,
         -10
       );
