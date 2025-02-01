@@ -6,10 +6,6 @@ import DiscussionList from 'flarum/forum/components/DiscussionList';
 import Discussion from 'flarum/common/models/Discussion';
 
 export default () => {
-  extend(DiscussionList.prototype, 'requestParams', (params) => {
-    params.include.push('essential');
-  });
-
   extend(Discussion.prototype, 'badges', function (badges) {
     if (this.essential()) {
       badges.add(

@@ -5,6 +5,7 @@
 	"prettier": "@flarum/prettier-config",
 	"dependencies": {
 		"@flarum/prettier-config": "^1.0.0",
+		"@nodeloc/flarum-ext-essential": "file:",
 		"flarum-tsconfig": "^1.0.2",
 		"flarum-webpack-config": "^2.0.0",
 		"webpack": "^5.87.0",

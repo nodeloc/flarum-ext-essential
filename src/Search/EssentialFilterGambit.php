@@ -1,27 +1,16 @@
 <?php
-
-/*
- * This file is part of flarumite/simple-discussion-views.
- *
- * Copyright (c) 2020 Flarumite.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Nodeloc\Essential\Search;
 
 use Flarum\Filter\FilterInterface;
 use Flarum\Filter\FilterState;
 use Flarum\Search\AbstractRegexGambit;
 use Flarum\Search\SearchState;
-use Flarum\User\User;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 class EssentialFilterGambit extends AbstractRegexGambit implements FilterInterface
 {
     /**
-     * {@inheritDoc}
+     * 获取过滤器键名
      */
     public function getFilterKey(): string
     {
@@ -29,33 +18,32 @@ class EssentialFilterGambit extends AbstractRegexGambit implements FilterInterfa
     }
 
     /**
-     * {@inheritDoc}
+     * 定义搜索匹配模式
      */
-    public function getGambitPattern()
+    protected function getGambitPattern(): string
     {
         return 'is:essential';
     }
 
     /**
-     * {@inheritDoc}
+     * 处理 API 过滤 `filter[essential]=1`
      */
     public function filter(FilterState $filterState, string $filterValue, bool $negate)
     {
-        $this->sort($filterState->getQuery(), $filterState->getActor(), $negate);
-    }
+        $query = $filterState->getQuery();
 
-    protected function sort(Builder $query, User $actor, bool $negate)
-    {
-        $query->orderBy('id', 'desc');
+        if ($negate) {
+            $query->where('essential', false);
+        } else {
+            $query->where('essential', true);
+        }
     }
 
     /**
-     * @param SearchState $search
-     * @param array       $matches
-     * @param             $negate
+     * 处理 `is:essential` 搜索语法
      */
     protected function conditions(SearchState $search, array $matches, $negate)
     {
-        $this->sort($search->getQuery(), $search->getActor(), $negate);
+        $this->filter($search, '1', $negate);
     }
 }

@@ -17,7 +17,9 @@ use Flarum\Discussion\Discussion;
 use Flarum\Discussion\Event\Saving;
 use Flarum\Discussion\Filter\DiscussionFilterer;
 use Flarum\Discussion\Search\DiscussionSearcher;
+use Flarum\User;
 use Flarum\Extend;
+use Nodeloc\Essential\Api\Controller\ListEssentialDiscussionsController;
 
 return [
     (new Extend\Frontend('forum'))
@@ -31,6 +33,8 @@ return [
 
     (new Extend\Model(Discussion::class))
         ->cast('essential', 'boolean'),
+    (new Extend\Model(User::class))
+        ->cast('essential_count', 'integer'),
 
     (new Extend\Event())
         ->listen(Saving::class, Listeners\SaveDiscussionFromModal::class),
@@ -43,7 +47,6 @@ return [
 
     (new Extend\ApiController(Controller\ListDiscussionsController::class))
         ->addSortField('essential'),
-
     (new Extend\Settings())
         ->serializeToForum('essentialRewardMoney', 'nodeloc-essential.rewardMoney', 'intval', 0),
 
@@ -55,4 +58,6 @@ return [
 
     (new Extend\Filter(DiscussionFilterer::class))
         ->addFilter(Search\EssentialFilterGambit::class),
+
+
 ];

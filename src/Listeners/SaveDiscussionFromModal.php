@@ -22,7 +22,17 @@ class SaveDiscussionFromModal
              * @var \Flarum\Discussion\Discussion
              */
             $discussion = $event->discussion;
-            $discussion->essential = $event->data['attributes']['essential'];
+            $isEssential = (bool) $event->data['attributes']['essential'];
+            $discussion->essential = $isEssential ;
+            if ($isEssential !== $discussion->essential) {
+                $user = $discussion->user;
+                if ($isEssential) {
+                    $user->essential_count++;
+                } else {
+                    $user->essential_count = max(0, $user->essential_count - 1);
+                }
+                $user->save();
+            }
         }
     }
 }
