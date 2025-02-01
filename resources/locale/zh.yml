@@ -5,6 +5,8 @@ core:
 
 nodeloc-essential:
   forum:
+    user:
+      essential_count: "{count} 篇精华"
     modal_set_essential:
       title: 帖子加精
       submit: 提交
@@ -13,7 +15,7 @@ nodeloc-essential:
     discussion_controls:
       essential_button: 设置精华
     tooltip:
-      badge: 精彩内容
+      badge: 精华内容
   admin:
       permissions:
         set_essential: 谁能设置精华？

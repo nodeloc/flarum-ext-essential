@@ -17,9 +17,9 @@ use Flarum\Discussion\Discussion;
 use Flarum\Discussion\Event\Saving;
 use Flarum\Discussion\Filter\DiscussionFilterer;
 use Flarum\Discussion\Search\DiscussionSearcher;
-use Flarum\User;
+use Flarum\User\User;
 use Flarum\Extend;
-use Nodeloc\Essential\Api\Controller\ListEssentialDiscussionsController;
+use Flarum\Api\Serializer\UserSerializer;
 
 return [
     (new Extend\Frontend('forum'))
@@ -44,6 +44,10 @@ return [
             return $discussion->essential;
         })
         ->attributes(AddAttributesBasedOnPermission::class),
+    (new Extend\ApiSerializer(UserSerializer::class))
+        ->attribute('essentialCount', function (UserSerializer $serializer, User $user) {
+            return $user->essential_count ?? 0;
+        }),
 
     (new Extend\ApiController(Controller\ListDiscussionsController::class))
         ->addSortField('essential'),

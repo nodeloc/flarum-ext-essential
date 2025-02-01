@@ -5,6 +5,8 @@ core:
 
 nodeloc-essential:
   forum:
+    user:
+      essential_count: "{count} Essential Posts"
     modal_set_essential:
       title: Set essential
       submit: Submit
