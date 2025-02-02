@@ -23,7 +23,6 @@ class SaveDiscussionFromModal
              */
             $discussion = $event->discussion;
             $isEssential = (bool) $event->data['attributes']['essential'];
-            $discussion->essential = $isEssential ;
             if ($isEssential !== $discussion->essential) {
                 $user = $discussion->user;
                 if ($isEssential) {
@@ -32,6 +31,7 @@ class SaveDiscussionFromModal
                     $user->essential_count = max(0, $user->essential_count - 1);
                 }
                 $user->save();
+                $discussion->essential = $isEssential ;
             }
         }
     }
